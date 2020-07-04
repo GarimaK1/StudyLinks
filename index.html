@@ -23,19 +23,19 @@
             <div class="form-group">
                 <label for="topic">Study Topic</label>
                 <input type="text" class="form-control" id="topic" aria-describedby="TextHelp"
-                    placeholder="Study Topic">
+                    placeholder="Study Topic" required>
             </div>
             <div class="form-group">
                 <label for="slink">Study Link</label>
                 <input type="text" class="form-control" id="slink" aria-describedby="TextHelp" 
-                    placeholder="Study Link">
+                    placeholder="Study Link" required>
             </div>
             <div class="form-group">
                 <label for="content-type">Content Type</label>
                 <select class="form-control" id="content-type">
-                    <option value="Blog/Article">Blog/Article</option>
-                    <option value="Youtube Video">Youtube Video</option>
-                    <option value="Official Website">Official Website</option>
+                    <option value="blog">Blog/Article</option>
+                    <option value="video">Youtube Video</option>
+                    <option value="official">Official Website</option>
                 </select>
             </div>
             <button type="submit" class="btn btn-primary btn-block">Add Link</button>
@@ -44,7 +44,6 @@
             <table class="table table-sm table-hover mt-4">
                 <thead>
                     <tr>
-                        <th scope="row">#</th>
                         <th scope="col">Study Topic</th>
                         <th scope="col">Study Link</th>
                         <th scope="col">Content Type</th>
@@ -53,12 +52,11 @@
                 </thead>
                 <tbody id="links-table-body">
                     <!-- <tr>
-                    <th scope="row">1</th>
-                    <td>Column content</td>
-                    <td>Column content</td>
-                    <td>Column content</td>
-                    <td></td>
-                </tr> -->
+                        <td>Column content</td>
+                        <td>Column content</td>
+                        <td>Column content</td>
+                        <td><button class="btn btn-danger btn-sm delete">X</button></td>
+                    </tr> -->
                 </tbody>
             </table>
         </div>

@@ -16,7 +16,6 @@ class StudyLink {
 
 // UI Class: Handle UI Tasks
 class UI {
-    static counter = 0;
     static displayLinks() {
         const study_links = [
             {
@@ -46,27 +45,44 @@ class UI {
         // Add row to table for each link
         const row = document.createElement('tr');
         row.innerHTML = `
-        <th scope="row">${++UI.counter}</th>
         <td>${link.topic}</td>
         <td><a href="${link.study_link}" target="_blank">${link.study_link}</a></td>
         <td>${link.study_type}</td>
+        <td><button class="btn btn-danger btn-sm delete">X</button></td>
         `;
         list.appendChild(row);
+    }
+
+    static clearFormFields() {
+        topic.value = "";
+        slink.value = "";
+    }
+
+    static removeLink(e) {
+        // We want to delete "tr". Button's parent: "td". td's parent: "tr"
+        if (e.target.classList.contains('delete')) {
+            e.target.parentElement.parentElement.remove();
+        }
     }
 }
 
 // Store Class: Handles LocalStorage
 
 // Event: Display Links
-document.onload = UI.displayLinks();
+document.addEventListener('DOMContentLoaded', UI.displayLinks);
 
 // Event: Add a Link
-linksForm.onsubmit = function (e) {
+linksForm.onsubmit = (e) => {
+    // Prevent submit to server
     e.preventDefault();
-    console.log(topic.value, slink.value, contentType.value);
+
+    // Get form values to instantiate new StudyLink object
     const newLink = new StudyLink(topic.value, slink.value, contentType.value);
     UI.addLinkToList(newLink);
+
+    // Clear text fields
+    UI.clearFormFields();
 }
 
-
 // Event: Remove a Link
+list.addEventListener('click', UI.removeLink);
