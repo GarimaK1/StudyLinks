@@ -1,3 +1,4 @@
+const container = document.querySelector('.container');
 const list = document.getElementById("links-table-body"); 
 const linksForm = document.getElementById('links-form');
 const topic = document.getElementById('topic');
@@ -58,11 +59,25 @@ class UI {
         slink.value = "";
     }
 
+    static showAlert(message, className) {
+        const alertDiv = document.createElement('div');
+        alertDiv.className = `alert alert-${className}`;
+        alertDiv.appendChild(document.createTextNode(message));
+        container.insertBefore(alertDiv, linksForm);
+        // Remove alert after 3 seconds
+        setTimeout(() => {
+            document.querySelector('.alert').remove();
+        }, 3000);
+    }
+
     static removeLink(e) {
         // We want to delete "tr". Button's parent: "td". td's parent: "tr"
         if (e.target.classList.contains('delete')) {
             e.target.parentElement.parentElement.remove();
+            // Show removed alert
+            UI.showAlert('Link removed successfully!', 'warning');
         }
+
     }
 }
 
@@ -79,6 +94,9 @@ linksForm.onsubmit = (e) => {
     // Get form values to instantiate new StudyLink object
     const newLink = new StudyLink(topic.value, slink.value, contentType.value);
     UI.addLinkToList(newLink);
+
+    // Show success alert
+    UI.showAlert('New link added successfully!', 'primary');
 
     // Clear text fields
     UI.clearFormFields();
