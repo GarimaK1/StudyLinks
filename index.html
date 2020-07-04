@@ -28,7 +28,7 @@
             </div>
             <div class="form-group">
                 <label for="slink">Study Link</label>
-                <input type="text" class="form-control" id="slink" aria-describedby="TextHelp" 
+                <input type="url" class="form-control" id="slink" aria-describedby="URLHelp" 
                     placeholder="Study Link" required>
             </div>
             <div class="form-group">
@@ -53,9 +53,9 @@
                 </thead>
                 <tbody id="links-table-body">
                     <!-- <tr>
-                        <td>Column content</td>
-                        <td>Column content</td>
-                        <td>Column content</td>
+                        <td>${link.topic}</td>
+                        <td><a href="${link.study_link}" target="_blank">${link.study_link}</a></td>
+                        <td>${link.study_type}</td>
                         <td><button class="btn btn-danger btn-sm delete">X</button></td>
                     </tr> -->
                 </tbody>

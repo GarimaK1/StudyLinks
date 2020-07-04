@@ -1,5 +1,5 @@
 const container = document.querySelector('.container');
-const list = document.getElementById("links-table-body"); 
+const list = document.getElementById("links-table-body");
 const linksForm = document.getElementById('links-form');
 const topic = document.getElementById('topic');
 const slink = document.getElementById('slink');
@@ -18,26 +18,7 @@ class StudyLink {
 // UI Class: Handle UI Tasks
 class UI {
     static displayLinks() {
-        const study_links = [
-            {
-                topic: 'Docker',
-                study_link: 'https://www.docker.com/',
-                study_type: 'official'
-            }, {
-                topic: 'Event Loop',
-                study_link: 'https://www.youtube.com/watch?v=8aGhZQkoFbQ',
-                study_type: 'video'
-            }, {
-                topic: 'JavaScript engines',
-                study_link: 'https://www.youtube.com/watch?v=p-iiEDtpy6I',
-                study_type: 'video'
-            }, {
-                topic: 'React Elements vs React Components',
-                study_link: 'https://ui.dev/react-elements-vs-react-components/',
-                study_type: 'blog'
-            }
-        ];
-        const links = study_links;
+        const links = LocalStore.getLinks();
 
         links.forEach(link => UI.addLinkToList(link));
     }
@@ -76,12 +57,49 @@ class UI {
             e.target.parentElement.parentElement.remove();
             // Show removed alert
             UI.showAlert('Link removed successfully!', 'warning');
-        }
 
+            // Remove from LocalStorage
+            const targetHref = e.target.parentElement.parentElement.children[1].firstChild.href;
+            console.log(targetHref);
+            LocalStore.removeLink(targetHref);
+        }
     }
 }
 
 // Store Class: Handles LocalStorage
+class LocalStore {
+    static getLinks() {
+        let links;
+        if (localStorage.getItem('links') === null) {
+            links = [];
+        } else {
+            links = JSON.parse(localStorage.getItem('links'));
+        }
+        return links;
+    }
+
+    static addLink(link) {
+        const links = LocalStore.getLinks();
+        links.push(link);
+        localStorage.setItem('links', JSON.stringify(links));
+    }
+
+    static removeLink(targetHref) {
+        const links = LocalStore.getLinks();
+        links.forEach((link, index) => {
+            if (link.study_link.endsWith('/')) {
+                if (link.study_link === targetHref)
+                    links.splice(index, 1);
+            } else {
+                link.study_link += "/";
+                if (link.study_link === targetHref)
+                    links.splice(index, 1);
+            }
+        });
+        // links.filter not working.
+        localStorage.setItem('links', JSON.stringify(links));
+    }
+}
 
 // Event: Display Links
 document.addEventListener('DOMContentLoaded', UI.displayLinks);
@@ -94,6 +112,9 @@ linksForm.onsubmit = (e) => {
     // Get form values to instantiate new StudyLink object
     const newLink = new StudyLink(topic.value, slink.value, contentType.value);
     UI.addLinkToList(newLink);
+
+    // Add link to LocalStorage
+    LocalStore.addLink(newLink);
 
     // Show success alert
     UI.showAlert('New link added successfully!', 'primary');
