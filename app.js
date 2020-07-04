@@ -60,7 +60,7 @@ class UI {
 
             // Remove from LocalStorage
             const targetHref = e.target.parentElement.parentElement.children[1].firstChild.href;
-            console.log(targetHref);
+            console.log('calling LS', targetHref);
             LocalStore.removeLink(targetHref);
         }
     }
@@ -87,13 +87,17 @@ class LocalStore {
     static removeLink(targetHref) {
         const links = LocalStore.getLinks();
         links.forEach((link, index) => {
-            if (link.study_link.endsWith('/')) {
-                if (link.study_link === targetHref)
-                    links.splice(index, 1);
+            if (link.study_link === targetHref) {
+                links.splice(index, 1);
             } else {
-                link.study_link += "/";
-                if (link.study_link === targetHref)
-                    links.splice(index, 1);
+                if (link.study_link.endsWith('/')) {
+                    if (link.study_link === targetHref)
+                        links.splice(index, 1);
+                } else {
+                    link.study_link += "/";
+                    if (link.study_link === targetHref)
+                        links.splice(index, 1);
+                }
             }
         });
         // links.filter not working.
