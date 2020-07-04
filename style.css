@@ -1,0 +1,30 @@
+i, h1 {
+  /* Using a gradient image to give color to i, h1 */
+  background: radial-gradient(100% 225% at 100% 0%, #faff00 0%, #000000 100%),
+    linear-gradient(235deg, #db00ff 0%, #000000 100%),
+    linear-gradient(
+      45deg,
+      #241e92 0%,
+      #241e92 40%,
+      #5432d3 40%,
+      #5432d3 50%,
+      #7b6cf6 50%,
+      #7b6cf6 70%,
+      #e5a5ff 70%,
+      #e5a5ff 100%
+    ),
+    linear-gradient(
+      180deg,
+      #01024e 0%,
+      #01024e 43%,
+      #543864 43%,
+      #543864 62%,
+      #8b4367 62%,
+      #8b4367 80%,
+      #ed4b82 80%,
+      #ed4b82 100%
+    );
+  background-blend-mode: overlay, hard-light, overlay, normal;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

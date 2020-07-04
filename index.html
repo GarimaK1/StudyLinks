@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Adding Font Awesome starter kit -->
+    <script src="https://kit.fontawesome.com/11bce01b7f.js" crossorigin="anonymous"></script>
+    <!-- Adding Bootswatch theme -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.0/pulse/bootstrap.min.css"
+        integrity="sha384-t87SWLASAVDfD3SOypT7WDQZv9X6r0mq1lMEc6m1/+tAVfCXosegm1BvaIiQm3zB" crossorigin="anonymous">
+    <link rel="stylesheet" href="./style.css" />
+    <title>StudyLinks</title>
+</head>
+
+<body>
+    <div class="container mt-2">
+        <h1 class="text-center text-primary p-2">
+            <i class="fas fa-link"></i>
+            My Study Links
+        </h1>
+        <form id="links-form">
+            <div class="form-group">
+                <label for="topic">Study Topic</label>
+                <input type="text" class="form-control" id="topic" aria-describedby="TextHelp"
+                    placeholder="Study Topic">
+            </div>
+            <div class="form-group">
+                <label for="slink">Study Link</label>
+                <input type="text" class="form-control" id="slink" aria-describedby="TextHelp" 
+                    placeholder="Study Link">
+            </div>
+            <div class="form-group">
+                <label for="content-type">Content Type</label>
+                <select class="form-control" id="content-type">
+                    <option value="Blog/Article">Blog/Article</option>
+                    <option value="Youtube Video">Youtube Video</option>
+                    <option value="Official Website">Official Website</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Add Link</button>
+        </form>
+        <div class="table-responsive">
+            <table class="table table-sm table-hover mt-4">
+                <thead>
+                    <tr>
+                        <th scope="row">#</th>
+                        <th scope="col">Study Topic</th>
+                        <th scope="col">Study Link</th>
+                        <th scope="col">Content Type</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody id="links-table-body">
+                    <!-- <tr>
+                    <th scope="row">1</th>
+                    <td>Column content</td>
+                    <td>Column content</td>
+                    <td>Column content</td>
+                    <td></td>
+                </tr> -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="./app.js"></script>
+</body>
+
+</html>
